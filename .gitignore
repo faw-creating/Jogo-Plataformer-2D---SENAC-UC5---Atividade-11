@@ -1,0 +1,21 @@
+# Este é o arquivo .gitignore para projetos Unity.
+
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Builds/
+/Logs/
+
+*.pid
+*.unityproj
+*.suo
+*.sln.DotSettings.user
+*.userprefs
+*.unity.meta
+*.csproj
+
+UserSettings/
+.vs/
+.vscode/
+.DS_Store
