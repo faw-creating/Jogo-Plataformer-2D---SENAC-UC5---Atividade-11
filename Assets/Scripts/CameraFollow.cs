@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform alvo; // Arraste o Player aqui no Inspector
-    
+
     public Vector3 offset = new Vector3(0, 0, -10); // Força o afastamento
                                                     // Mude o valor de suavidade para um número alto (ex: 1) para ELIMINAR A SUAVIZAÇÃO temporariamente.
     public float suavidade = 1f; // <-- Mude para 1.0f para um seguimento duro/imediato.

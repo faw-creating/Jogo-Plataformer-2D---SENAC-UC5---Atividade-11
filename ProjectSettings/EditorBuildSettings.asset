@@ -6,20 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: cedf5724ec1a27e4d85149e546669c04
-  - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: d9f35f39b8ab0624bba205d09a255b11
-  - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: 3b10037b56f7ffa4f8dd64ab5f1929d6
-  - enabled: 1
-    path: Assets/Scenes/GameOver.unity
-    guid: 41641d41aef8c1641bfcc11771231ebd
-  - enabled: 0
-    path: Assets/Scenes/Victory!.unity
-    guid: 32ebec36e885fdc40a70f5229a24899a
+    path: Assets/Scenes/Level1_Novo.unity
+    guid: 39cc3345784f6a3428b8fc7aef9ae38f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
