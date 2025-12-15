@@ -96,11 +96,21 @@ public class EnemySimple : MonoBehaviour
     {
         if (colisao.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Game Over!");
-            // Reinicia a cena
-            UnityEngine.SceneManagement.SceneManager.LoadScene(
-                UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
-            );
+            Debug.Log("Derrota por Robotino! Chamando Game Over...");
+
+            // Procura o objeto com o MenuManager (geralmente o GameManager)
+            MenuManager menu = Object.FindFirstObjectByType<MenuManager>();
+
+            if (menu != null)
+            {
+                // Chama a função GameOver que carrega a cena "GameOver"
+                menu.GameOver();
+            }
+            else
+            {
+                // Se o MenuManager não foi encontrado, reinicia como fallback
+                UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+            }
         }
     }
 }

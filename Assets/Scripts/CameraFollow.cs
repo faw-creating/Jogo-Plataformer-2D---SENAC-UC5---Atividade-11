@@ -1,23 +1,29 @@
-using UnityEngine;
+using UnityEngine; // Importa as funcionalidades básicas da Unity
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform alvo; // Arraste o Player aqui no Inspector
+    [Header("Configurações de Seguimento")]
+    public Transform alvo; // O Player (arraste no Inspector)
+    public Vector3 offset = new Vector3(0, 0, -10); // Afastamento da câmera
 
-    public Vector3 offset = new Vector3(0, 0, -10); // Força o afastamento
-                                                    // Mude o valor de suavidade para um número alto (ex: 1) para ELIMINAR A SUAVIZAÇÃO temporariamente.
-    public float suavidade = 1f; // <-- Mude para 1.0f para um seguimento duro/imediato.
+    [Range(0.01f, 1f)]
+    public float suavidade = 0.125f; // Fator de suavização (0.5 é bom para começar)
 
-    void LateUpdate()
+    void LateUpdate() // LateUpdate é chamado após todos os Updates
     {
         if (alvo != null)
         {
             Vector3 posicaoDesejada = alvo.position + offset;
 
-            // Mude o 'suavidade' para 1.0f para testar se a câmera está seguindo o alvo IMEDIATAMENTE.
-            Vector3 posicaoSuavizada = Vector3.Lerp(transform.position, posicaoDesejada, 1.0f);
+            // **CORREÇÃO:** Usamos Time.deltaTime para suavizar o movimento de forma gradual.
+            Vector3 posicaoSuavizada = Vector3.Lerp(
+                transform.position,
+                posicaoDesejada,
+                suavidade * Time.deltaTime * 5f // 5f é um multiplicador para tornar a câmera mais rápida
+            );
 
+            // Mantém o Z fixo em -10
             transform.position = new Vector3(posicaoSuavizada.x, posicaoSuavizada.y, -10f);
         }
     }
-}
+} // Fim da classe CameraFollow

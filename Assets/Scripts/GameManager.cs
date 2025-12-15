@@ -57,4 +57,12 @@ public class GameManager : MonoBehaviour // Início da classe GameManager
             Debug.LogWarning("O textoPontuacao do GameManager está nulo! Conecte-o no Inspector.");
         }
     }
-} // Fim da classe GameManager
+
+    // Novo: Salva o nome da cena atual como Checkpoint
+    public void SalvarCheckpoint(string nomeDaCena)
+    {
+        PlayerPrefs.SetString("CheckpointScene", nomeDaCena);
+        PlayerPrefs.Save(); // Garante que o disco salve imediatamente
+        Debug.Log("Checkpoint salvo: " + nomeDaCena);
+    }
+}
