@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 832262805035020485}
+  - component: {fileID: 5392660255277741859}
   - component: {fileID: 2378516039874340070}
   m_Layer: 0
   m_Name: Moedinha de Esmeralda (1)
@@ -32,6 +33,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5392660255277741859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4305972168727411264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3b3dad1720b11e47b4bdc14cbd82562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collectible
+  pontosParaAdicionar: 9
 --- !u!212 &2378516039874340070
 SpriteRenderer:
   m_ObjectHideFlags: 0

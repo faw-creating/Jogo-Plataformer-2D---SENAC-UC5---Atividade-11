@@ -1,24 +1,26 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class EnemySimple : MonoBehaviour
 {
-    [Header("--- ConfiguraÁ„o de Movimento ---")]
+    [Header("--- Configura√ß√£o de Movimento ---")]
     public float velocidade = 2.0f;
     public float distanciaPatrulha = 3.0f;
-    public float distanciaAtaque = 6.0f; // Dist‚ncia para comeÁar a perseguir
+    public float distanciaAtaque = 6.0f;
 
-    [Header("--- ReferÍncias ---")]
-    public Transform player; // O alvo (Capsy)
+    [Header("--- Refer√™ncias ---")]
+    public Transform player;
     private float posicaoInicialX;
     private bool indoParaDireita = true;
     private SpriteRenderer spriteRenderer;
+
+    // Vari√°vel para evitar spam no console (logar apenas a cada 1 segundo)
+    private float tempoUltimoLog = 0f;
 
     void Start()
     {
         posicaoInicialX = transform.position.x;
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Tenta achar o Player sozinho se vocÍ esqueceu de arrastar
         if (player == null)
         {
             GameObject p = GameObject.FindWithTag("Player");
@@ -28,14 +30,21 @@ public class EnemySimple : MonoBehaviour
 
     void Update()
     {
-        // 1. Calcula a dist‚ncia atÈ o jogador
-        float distanciaDoPlayer = 100f; // Valor alto padr„o
+        float distanciaDoPlayer = 100f;
         if (player != null)
         {
             distanciaDoPlayer = Vector2.Distance(transform.position, player.position);
+
+            // --- DEBUG LOGS (Est√©tico) ---
+            // Se estiver perto (distancia < 3) e j√° passou 1 segundo desde o √∫ltimo aviso
+            if (distanciaDoPlayer < 3.0f && Time.time > tempoUltimoLog + 1.0f)
+            {
+                Debug.Log($"‚ö†Ô∏è Robotino detectou intruso! Dist√¢ncia: {distanciaDoPlayer:F1}m");
+                tempoUltimoLog = Time.time;
+            }
         }
 
-        // 2. DECIS√O: Perseguir ou Patrulhar?
+        // DECIS√ÉO
         if (distanciaDoPlayer < distanciaAtaque)
         {
             PerseguirPlayer();
@@ -48,18 +57,11 @@ public class EnemySimple : MonoBehaviour
 
     void PerseguirPlayer()
     {
-        // Move em direÁ„o ao Player
         transform.position = Vector2.MoveTowards(transform.position, player.position, velocidade * Time.deltaTime);
 
-        // Vira o sprite para olhar para o player
-        if (player.position.x > transform.position.x)
-        {
-            VirarSprite(false); // Olha para a direita
-        }
-        else
-        {
-            VirarSprite(true); // Olha para a esquerda
-        }
+        // Vira o sprite
+        if (player.position.x > transform.position.x) VirarSprite(false);
+        else VirarSprite(true);
     }
 
     void MoverPatrulha()
@@ -96,21 +98,34 @@ public class EnemySimple : MonoBehaviour
     {
         if (colisao.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Derrota por Robotino! Chamando Game Over...");
+            Debug.Log("‚ùå CAPSY FOI PEGO! Game Over."); // Log est√©tico de derrota
 
-            // Procura o objeto com o MenuManager (geralmente o GameManager)
             MenuManager menu = Object.FindFirstObjectByType<MenuManager>();
-
-            if (menu != null)
-            {
-                // Chama a funÁ„o GameOver que carrega a cena "GameOver"
-                menu.GameOver();
-            }
-            else
-            {
-                // Se o MenuManager n„o foi encontrado, reinicia como fallback
-                UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
-            }
+            if (menu != null) menu.GameOver();
+            else UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
         }
+    }
+
+    // --- PARTE VISUAL (GIZMOS) ---
+    // Isso desenha a linha vermelha na cena quando voc√™ clica no inimigo
+    void OnDrawGizmosSelected()
+    {
+        // Desenha uma linha representando a √°rea de patrulha
+        Gizmos.color = Color.yellow;
+        // Onde ele nasceu (aproximado se o jogo n√£o come√ßou) ou posi√ß√£o inicial salva
+        float centro = Application.isPlaying ? posicaoInicialX : transform.position.x;
+
+        Vector3 pontoEsq = new Vector3(centro - distanciaPatrulha, transform.position.y, 0);
+        Vector3 pontoDir = new Vector3(centro + distanciaPatrulha, transform.position.y, 0);
+
+        Gizmos.DrawLine(pontoEsq, pontoDir);
+
+        // Desenha esferas nas pontas para ficar bonitinho
+        Gizmos.DrawSphere(pontoEsq, 0.2f);
+        Gizmos.DrawSphere(pontoDir, 0.2f);
+
+        // Desenha o raio de ataque (C√≠rculo Vermelho)
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, distanciaAtaque);
     }
 }

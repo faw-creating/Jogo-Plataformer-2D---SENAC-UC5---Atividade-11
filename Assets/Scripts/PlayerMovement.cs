@@ -1,67 +1,46 @@
-// Inicio do c�digo PlayerMovement.cs
-// importante: Este script deve ser anexado a um GameObject que possua um componente Rigidbody2D para funcionar corretamente.
-using UnityEngine; // Importa namespace "UnityEngine" (principal) para acesso �s funcionalidades da Unity
+using UnityEngine;
 
-// Este script controla o movimento horizontal e o salto do jogador.
-public class PlayerMovement : MonoBehaviour // In�cio da classe PlayerMovement
+public class PlayerMovement : MonoBehaviour
 {
-    // Campos p�blicos que podem ser ajustados no Inspector da Unity
-    [Header("Configura��es de Movimento")] // Cabe�alho para organiza��o no Inspector
-    public float velocidadeMovimento = 7.0f; // Velocidade m�xima horizontal
-    public float forcaPulo = 12.0f;          // For�a aplicada ao pular
-    public float suavizacaoMovimento = 0.5f; // Fator para tornar a parada/in�cio suave (entre 0 e 1)
+    [Header("Configurações")]
+    public float velocidadeMovimento = 7.0f;
+    public float forcaPulo = 12.0f;
 
-    // Componentes e Vari�veis Privadas
-    private Rigidbody2D rb;             // Refer�ncia ao componente Rigidbody2D
-    private float inputHorizontal;      // Valor de entrada do teclado (-1 para esquerda, 1 para direita)
-    private bool estaNoChao = false;    // Verifica se o jogador est� tocando o ch�o
+    [Header("Detecção de Chão")]
+    public Transform verificadorChao;
+    public LayerMask layerChao;
+    public float raioVerificador = 0.2f;
 
-    // Refer�ncia para o transform que detecta o ch�o (opcional, mas recomendado para 2D)
-    [Header("Detec��o de Ch�o")] // Cabe�alho para organiza��o no Inspector
-    public Transform verificadorChao; // Ponto de verifica��o do ch�o
-    public LayerMask layerChao; // Qual Layer define o "ch�o"
-    public float raioVerificador = 0.2f; // Raio do c�rculo para verifica��o do ch�o
+    private Rigidbody2D rb;
+    private float inputHorizontal;
+    private bool estaNoChao;
 
-    void Awake() // Chamado quando o script � carregado
+    void Awake()
     {
-        Debug.Log("PlayerMovement Awake chamado, c�digo iniciado"); // Log para depura��o
-        // Garante que a refer�ncia ao Rigidbody2D seja obtida
-        rb = GetComponent<Rigidbody2D>(); // Tenta obter o componente Rigidbody2D anexado ao mesmo GameObject
-        if (rb == null) // Verifica se o Rigidbody2D foi encontrado
-        { // In�cio do if
-            Debug.LogError("O Rigidbody2D est� faltando no Player! Corrija!"); // Log de erro se n�o encontrado
-        } // Fim do if
-    } // Fim do Awake
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-    // Update � chamado a cada frame e � usado para ler a entrada do usu�rio
-    void Update() // In�cio do Update
-    { // 1. MOVIMENTO HORIZONTAL E PULO
-        // 1. LER ENTRADA HORIZONTAL
-        inputHorizontal = Input.GetAxisRaw("Horizontal"); // Obt�m entrada do teclado (A/D ou Setas Esquerda/Direita)
-
-        // 2. DETEC��O DE PULO (tecla Espa�o)
-        // O jogador s� pode pular se estiver no ch�o
-        if (Input.GetKeyDown(KeyCode.Space) && estaNoChao) // Verifica se a tecla Espa�o foi pressionada e se est� no ch�o
-        { // In�cio do if
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f); // Zera a velocidade vertical para garantir a for�a total
-            rb.AddForce(new Vector2(0f, forcaPulo), ForceMode2D.Impulse); // Aplica a for�a de pulo instantaneamente
-        } // Fim do if
-    } // Fim do Update
-
-    // FixedUpdate � chamado em intervalos fixos (melhor para f�sica e Rigidbody)
-    void FixedUpdate() // In�cio do FixedUpdate
+    void Update()
     {
-        // 1. VERIFICAR SE EST� NO CH�O
-        // Usa um c�rculo invis�vel no p� do personagem para checar a colis�o com o ch�o
-        estaNoChao = Physics2D.OverlapCircle(verificadorChao.position, raioVerificador, layerChao); // Verifica se o c�rculo est� colidindo com o ch�o
+        // 1. INPUT (A e D ou Setas)
+        inputHorizontal = Input.GetAxisRaw("Horizontal");
 
-        // 2. CALCULAR A VELOCIDADE ALVO (sem a suaviza��o)
-        Vector2 velocidadeAlvo = new Vector2(inputHorizontal * velocidadeMovimento, rb.linearVelocity.y); // Calcula a velocidade desejada com base na entrada do jogador
+        // 2. PULO
+        if (Input.GetKeyDown(KeyCode.Space) && estaNoChao)
+        {
+            // Zera a velocidade Y antes de pular para garantir altura consistente
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
+        }
+    }
 
-        // 3. APLICAR SUAVIZA��O E MOVIMENTO
-        // Usamos Lerp (Interpola��o Linear) para mover a velocidade atual para a velocidade alvo de forma suave.
-        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, velocidadeAlvo, suavizacaoMovimento * Time.fixedDeltaTime); // Aplica a suaviza��o ao movimento
-    } // Fim do FixedUpdate
-} // Fim da classe PlayerMovement
+    void FixedUpdate()
+    {
+        // 3. CHECAR CHÃO
+        estaNoChao = Physics2D.OverlapCircle(verificadorChao.position, raioVerificador, layerChao);
 
-// Fim do c�digo PlayerMovement.cs
+        // 4. MOVER (Correção: Atribuição direta para teste)
+        // Removemos o Lerp para garantir que ele ande. Se andar, depois suavizamos.
+        rb.linearVelocity = new Vector2(inputHorizontal * velocidadeMovimento, rb.linearVelocity.y);
+    }
+}
