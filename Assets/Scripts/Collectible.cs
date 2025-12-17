@@ -14,7 +14,7 @@ public class Collectible : MonoBehaviour // Início da classe Collectible
     // Chamado quando algo entra no Trigger (Gatilho) deste objeto
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verifica se o objeto que colidiu tem a tag "Player".
+        // Verifica se o objeto que colidiu tem a tag "Player".ls
         if (collision.CompareTag(PlayerTag))
         {
             WhenCollect(); // Chama o método para lidar com a coleta

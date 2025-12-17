@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &663666583838337553
+--- !u!1 &5000643649934696341
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,54 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2120016160918610346}
-  - component: {fileID: 7692057019262417406}
-  - component: {fileID: 1332156038945246799}
-  - component: {fileID: 7600312551216582503}
+  - component: {fileID: 2118063707442042107}
+  - component: {fileID: 2766209944177535271}
+  - component: {fileID: 2770848168919413416}
+  - component: {fileID: 8320530721420507395}
   m_Layer: 0
-  m_Name: Espinhos (1)
-  m_TagString: Untagged
+  m_Name: "Bandeirinha de Vit\xF3ria"
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2120016160918610346
+--- !u!4 &2118063707442042107
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663666583838337553}
+  m_GameObject: {fileID: 5000643649934696341}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7692057019262417406
+--- !u!114 &2766209944177535271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663666583838337553}
+  m_GameObject: {fileID: 5000643649934696341}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6831e091ac6fcb428b713e1fbde494b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelEnd
-  isVictoryTrigger: 0
-  nextSceneName: GameOver
-  tempoDeEspera: 2
---- !u!60 &1332156038945246799
+  isVictoryTrigger: 1
+  nextSceneName: NextLevelNameHere
+  tempoDeEspera: 1
+--- !u!60 &2770848168919413416
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663666583838337553}
+  m_GameObject: {fileID: 5000643649934696341}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -79,7 +79,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -95,24 +95,28 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.34409094, y: -0.34477258}
-      - {x: 0.004377842, y: 0.5246391}
-      - {x: -0.3291533, y: -0.34305668}
-      - {x: -0.49948287, y: -0.34563637}
-      - {x: -0.49579263, y: -0.43569613}
-      - {x: -0.4929602, y: -0.4966507}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.50703967, y: -0.41414785}
-      - {x: 0.501716, y: -0.3465824}
+    - - {x: -0.038542733, y: -0.079490066}
+      - {x: 0.36336586, y: 0.10994688}
+      - {x: 0.36581612, y: 0.14724152}
+      - {x: 0.0993396, y: 0.26671034}
+      - {x: 0.120320424, y: 0.37004077}
+      - {x: -0.2087146, y: 0.43653154}
+      - {x: -0.22234422, y: 0.46624112}
+      - {x: -0.31603584, y: 0.45107114}
+      - {x: -0.2963031, y: 0.33016634}
+      - {x: -0.15625, y: -0.5}
+      - {x: -0.046875, y: -0.5}
+      - {x: -0.046361536, y: -0.49948657}
+      - {x: -0.15316924, y: -0.025263816}
+      - {x: -0.08689967, y: 0.0050761327}
   m_UseDelaunayMesh: 0
---- !u!212 &7600312551216582503
+--- !u!212 &8320530721420507395
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663666583838337553}
+  m_GameObject: {fileID: 5000643649934696341}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -152,8 +156,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4583797b9101bcc46abfbe23fc0f44e6, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 9c7ac6199c903034cbf4f9bfad3a9737, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1e2d8c255135b40b77cc3cbf70096b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  alvo: {fileID: 0}
+  alvo: {fileID: 3961238549767118801, guid: 1387e7fcda4b7694582558e53c831daf, type: 3}
   offset: {x: 0, y: 0, z: -10}
   suavidade: 0.85
 --- !u!20 &2621015517949440798
