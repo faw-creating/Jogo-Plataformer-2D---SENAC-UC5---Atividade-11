@@ -2,12 +2,12 @@
 
 public class EnemySimple : MonoBehaviour
 {
-    [Header("--- Configuração de Movimento ---")]
+    [Header("Configuração de Movimento")]
     public float velocidade = 2.0f;
     public float distanciaPatrulha = 3.0f;
     public float distanciaAtaque = 6.0f;
 
-    [Header("--- Referências ---")]
+    [Header("Referências")]
     public Transform player;
     private float posicaoInicialX;
     private bool indoParaDireita = true;

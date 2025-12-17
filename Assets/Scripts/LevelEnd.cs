@@ -9,7 +9,7 @@ public class LevelEnd : MonoBehaviour // Classe responsável por gerenciar o fim 
     [Header("Configurações do Fim de Jogo")] // Cabeçalho no Inspetor
     public bool isVictoryTrigger = true; // Define se é vitória ou derrota
     public string nextSceneName = "GameOver"; // Nome da próxima cena (se vitória)
-    public float tempoDeEspera = 2.0f; // Tempo de delay (em segundos)
+    public float tempoDeEspera = 1.0f; // Tempo de delay (em segundos)
 
     private bool levelEncerrado = false; // Trava para impedir repetições
 
