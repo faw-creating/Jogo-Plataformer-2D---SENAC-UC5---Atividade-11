@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   velocidadeMovimento: 4
-  forcaPulo: 7
+  forcaPulo: 7.1
   verificadorChao: {fileID: 8834470065250953396}
   layerChao:
     serializedVersion: 2

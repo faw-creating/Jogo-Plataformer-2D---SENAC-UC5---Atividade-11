@@ -1,5 +1,6 @@
-using UnityEngine; // Importa as funcionalidades básicas da Unity
 using TMPro; // Importa o TextMeshPro (ESSENCIAL para texto UI)
+using UnityEngine; // Importa as funcionalidades básicas da Unity
+using UnityEngine.SceneManagement; // Importa funcionalidades de gerenciamento de cenas
 
 // O GameManager será responsável por guardar o estado do jogo (pontuação, vida, etc.)
 public class GameManager : MonoBehaviour // Início da classe GameManager
@@ -23,6 +24,14 @@ public class GameManager : MonoBehaviour // Início da classe GameManager
             Instance = this; // Define esta instância como a única
             // IMPORTANTE: Mantém o GameManager vivo ao carregar novas cenas (Level1 -> GameOver)
             DontDestroyOnLoad(gameObject); // Evita que o GameManager seja destruído ao carregar uma nova cena
+                                           // Dentro do Awake do GameManager.cs
+            string cenaAtual = SceneManager.GetActiveScene().name;
+
+            // Se a cena NÃO for o Menu e NÃO for o GameOver, salve como checkpoint
+            if (cenaAtual != "MenuPrincipal" && cenaAtual != "GameOver")
+            {
+                SalvarCheckpoint(cenaAtual);
+            }
         }
         else
         {

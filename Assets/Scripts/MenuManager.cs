@@ -21,6 +21,14 @@ public class MenuManager : MonoBehaviour // MonoBehaviour conecta o script a um 
         Debug.Log("O botão PLAY foi clicado! Iniciando " + nomeDaCena); // Mensagem de debug 1
     } // Fim da função CarregarCena
 
+    public void CarregarUltimoCheckpoint()
+    {
+        // Procura o nome da fase salva. Se não achar nada, volta pro Level1_Novo
+        string faseSalva = PlayerPrefs.GetString("CheckpointScene", "Level1_Novo");
+        SceneManager.LoadScene(faseSalva);
+        Debug.Log("Carregando o progresso salvo: " + faseSalva);
+    }
+
     // Esta função será chamada pelo botão "Reiniciar"
     public void ReiniciarCenaAtual()
     { // Início da função ReiniciarCenaAtual
